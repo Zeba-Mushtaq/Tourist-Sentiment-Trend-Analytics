@@ -24,6 +24,10 @@ Python | Pandas | TextBlob | Scikit-learn | LDA | Matplotlib | Seaborn | WordClo
 [TripAdvisor Hotel Reviews — Kaggle](https://www.kaggle.com/datasets/andrewmvd/trip-advisor-hotel-reviews)
 20,491 reviews | 2 columns | Usability score: 10/10
 
+## 🔮 Future Improvements
+
+- Explore transformer-based models (BERT/RoBERTa) to improve sentiment classification and rating prediction accuracy.
+
 ## 🚀 How to Run
 
 ```bash
