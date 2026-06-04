@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
 from textblob import TextBlob
 from wordcloud import WordCloud
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
@@ -83,28 +84,70 @@ with col2:
     st.pyplot(fig)
 
 st.markdown("---")
+st.subheader("🔍 Interactive Analysis")
 
-# Word clouds
-st.subheader("☁️ Word Clouds")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("**Positive Reviews**")
-    pos_text = ' '.join(df[df['Sentiment']=='Positive']['Review'].tolist())
-    wc = WordCloud(width=800, height=400, background_color='white', colormap='Greens').generate(pos_text)
-    fig, ax = plt.subplots()
-    ax.imshow(wc)
-    ax.axis('off')
-    st.pyplot(fig)
+    st.markdown("**Polarity vs Rating (Scatter)**")
+    fig = px.scatter(
+        df.sample(2000), 
+        x='polarity', 
+        y='Rating',
+        color='Sentiment',
+        hover_data=['Review'],
+        color_discrete_map={
+            'Positive':'#2ecc71',
+            'Negative':'#e74c3c',
+            'Neutral':'#95a5a6'
+        },
+        title='Polarity vs Rating'
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
 with col2:
-    st.markdown("**Negative Reviews**")
-    neg_text = ' '.join(df[df['Sentiment']=='Negative']['Review'].tolist())
-    wc = WordCloud(width=800, height=400, background_color='white', colormap='Reds').generate(neg_text)
-    fig, ax = plt.subplots()
-    ax.imshow(wc)
-    ax.axis('off')
-    st.pyplot(fig)
+    st.markdown("**Rating Distribution (Interactive)**")
+    fig2 = px.histogram(
+        df, 
+        x='Rating',
+        color='Sentiment',
+        barmode='group',
+        color_discrete_map={
+            'Positive':'#2ecc71',
+            'Negative':'#e74c3c',
+            'Neutral':'#95a5a6'
+        },
+        title='Ratings by Sentiment'
+    )
+    st.plotly_chart(fig2, use_container_width=True)
+
+st.markdown("---")
+st.subheader("📝 Review Explorer")
+
+sentiment_filter = st.selectbox(
+    "Filter by Sentiment:",
+    ['All', 'Positive', 'Negative', 'Neutral']
+)
+
+rating_filter = st.slider("Filter by Rating:", 1, 5, (1, 5))
+
+if sentiment_filter == 'All':
+    filtered_df = df[
+        (df['Rating'] >= rating_filter[0]) & 
+        (df['Rating'] <= rating_filter[1])
+    ]
+else:
+    filtered_df = df[
+        (df['Sentiment'] == sentiment_filter) & 
+        (df['Rating'] >= rating_filter[0]) & 
+        (df['Rating'] <= rating_filter[1])
+    ]
+
+st.write(f"Showing {len(filtered_df):,} reviews")
+st.dataframe(
+    filtered_df[['Review', 'Rating', 'Sentiment', 'polarity']].head(50),
+    use_container_width=True
+)
 
 st.markdown("---")
 
