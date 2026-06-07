@@ -1,4 +1,7 @@
 # 🌍 Tourist Sentiment & Trend Analytics
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://tourist-sentiment-zeba.streamlit.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Zeba-Mushtaq/tourist-sentiment-analytics)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 
 NLP-powered analysis of 20,000+ TripAdvisor hotel reviews using sentiment analysis, topic modeling, and ML-based rating prediction.
 
