@@ -20,7 +20,7 @@ NLP-powered analysis of 20,000+ TripAdvisor hotel reviews using sentiment analys
 
 ## 🛠️ Tech Stack
 
-Python | Pandas | TextBlob | Scikit-learn | LDA | Matplotlib | Seaborn | WordCloud
+Python | Pandas | TextBlob | Scikit-learn | LDA | Matplotlib | Seaborn | WordCloud |Machine Learning
 
 ## 📁 Dataset
 
